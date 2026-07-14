@@ -1,0 +1,28 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: greetings.demo.crd
+  namespace: greet
+spec:
+  group: demo.crd
+  scope: Namespaced
+  names:
+    plural: greetings
+    singular: greeting
+    kind: Greeting
+
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                name: { type: string }
+                language: { type: string }
+                
+# It will define the schema for a new kind:Greeting and create endpoint at the API SERVER.

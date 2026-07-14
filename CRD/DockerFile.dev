@@ -1,0 +1,7 @@
+FROM python:3.9-slim
+
+RUN pip install kopf kubernetes
+
+COPY greeting-controller.py /greeting-controller.py
+
+CMD ["kopf", "run", "/greeting-controller.py"]

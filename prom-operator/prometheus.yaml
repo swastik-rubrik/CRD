@@ -1,0 +1,8 @@
+apiVersion: monitoring.coreos.com/v1
+kind: Prometheus
+metadata:
+  name: main
+spec:
+  serviceMonitorSelector: {}   # {} = watch ALL ServiceMonitors
+  ruleSelector: {}             # {} = watch ALL PrometheusRules
+  replicas: 2

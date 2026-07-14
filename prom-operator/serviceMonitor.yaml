@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: webapp-monitor
+spec:
+  selector:
+    matchLabels:
+      app: webapp-service      #  "scrape any Service with this label"
+  endpoints:
+    - port: metrics    # scrape the port named "metrics"
+      interval: 30s

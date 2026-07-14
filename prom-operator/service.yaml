@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-service
+  labels:
+    app: webapp-service        #  the label the ServiceMonitor will match
+spec:
+  selector:
+    app: webapp
+  ports:
+    - name: metrics    # named port the ServiceMonitor references
+      port: 8080
+      targetPort: 3000
+
+      # Requests come onto the 8080 port of the Service -> Forwarded to the 3000 port of the Pod

@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: alert-rules
+spec:
+  groups:
+    - name: alert-groups
+      rules:
+        - alert: AppDown
+          expr: up{job="webapp-service"} == 0  
+          for: 5m

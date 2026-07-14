@@ -1,0 +1,10 @@
+apiVersion: demo.crd/v1
+kind: Greeting
+metadata:
+  name: greet-dan
+  namespace: greet
+spec:
+  name: Dan
+  language: English 
+
+  # It will validate against the crd defined at the api server and store the desired state of the resource in the etcd when running apply here .

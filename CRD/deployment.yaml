@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: greeting-controller-deployment
+  namespace: greet
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: greeting
+  template:
+    metadata:
+      labels:
+        app: greeting
+    spec:
+      serviceAccountName: greeting-acccount
+      containers:
+        - name: greeting-controller
+          image: greetings:v1
+          imagePullPolicy: IfNotPresent
+          command: ["kopf"]
+          args:
+            - run
+            - /greeting-controller.py
+            - --namespace
+            - greet
