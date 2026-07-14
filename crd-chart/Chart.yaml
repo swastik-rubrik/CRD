@@ -1,0 +1,8 @@
+apiVersion: v2
+name: crd-chart
+description: A Helm chart for Kubernetes understanding the CRD and its controller.
+
+type: application
+
+version: 0.1.0.  # The version of helm chart
+appVersion: "1.16.0" # The version of the application in Helm chart.
