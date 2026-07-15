@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+
+kind: Deployment
+
+metadata:
+  name: greeter
+  namespace: lab1
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: greeter
+
+  template:
+    metadata:
+      labels:
+        app: greeter
+
+    spec:
+      containers:
+        - name: webapp
+          image: busybox:1.36
+          command: ['sh', "-c"]
+          args:
+            - |
+              echo "GREETING=$GREETING";
+              echo "LOG_LEVEL=$LOG_LEVEL";
+              while true; do
+                echo "--- file config $(date) ---";
+                cat /etc/appconfig/app.properties;
+                sleep 10;
+              done
+              
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:  
+                  name: greeter-secret
+                  key: DB_PASSWORD
+          envFrom:
+            - configMapRef:
+                name: greeter-config 
+            
+          volumeMounts:
+            - name: filecfg
+              mountPath: /etc/appconfig    
+      volumes:
+      - name: filecfg
+        configMap:  
+          name: greeter-config 

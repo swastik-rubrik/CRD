@@ -1,0 +1,9 @@
+apiVersion: apps.example.com/v1
+kind: WebApp
+metadata:
+  name: hello
+  namespace: webapp-operator
+spec:
+  image: nginx:1.27
+  replicas: 3
+  greeting: "hi from the bash operator"

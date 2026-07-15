@@ -1,0 +1,34 @@
+apiVersion: rbac.authorization.k8s.io/v1
+
+kind: Role
+
+metadata:
+  name: webapp-controller
+  namespace: webapp-operator
+
+rules:
+- apiGroups: ["apps.example.com"]   # our CRD's group
+  resources: ["webapps"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]               # built-in Deployments
+  resources: ["deployments"]
+  verbs: ["get", "list", "watch", "create", "update", "patch", "delete"]
+
+---
+
+apiVersion: rbac.authorization.k8s.io/v1
+
+kind: RoleBinding
+
+metadata:
+  name: webapp-controller
+  namespace: webapp-operator
+
+subjects:
+- kind: ServiceAccount
+  name: webapp-controller
+  namespace: webapp-operator
+roleRef:
+  kind: Role
+  name: webapp-controller
+  apiGroup: rbac.authorization.k8s.io

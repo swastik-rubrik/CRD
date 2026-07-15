@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: greeter-config
+  namespace: lab1
+data:
+  GREETING: hello from VASU
+  LOG_LEVEL: info
+
+  app.properties: |
+    feature.newUI=true
+    feature.beta=true
